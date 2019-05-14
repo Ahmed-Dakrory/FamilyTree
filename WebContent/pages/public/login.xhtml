@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/templates/main_template.xhtml">
+
+	<ui:define name="title">Shop Login</ui:define>
+
+	<ui:define name="content">
+		 <script src="https://apis.google.com/js/platform.js" async="async" ></script>
+		<meta name="google-signin-client_id" content="912564456809-8mive6m3ekvho7c6ed5rdrestk15l4ss.apps.googleusercontent.com"/>
+			
+	    <link rel="stylesheet" href="#{resource['css:login.css']}" />
+		
+		<div class="container divContainer">
+			<section id="content">
+				<form action="">
+					<h1>Login Form</h1>
+					<div>
+						<input type="text" placeholder="Username" required="" id="username" />
+					</div>
+					<div>
+						<input type="password" placeholder="Password" required="" id="password" />
+					</div>
+					<div>
+						<input type="submit" value="Log in" />
+						<a href="#">Lost your password?</a>
+						<a href="#">Register</a>
+					</div>
+					
+				</form><!-- form -->
+				<div class="button">
+					<p style="    margin-top: -6%;    font-size: 22px;    font-family: cursive;"> or </p>
+				<div class="g-signin2 " style="    margin-left: 37%;" data-onsuccess="onSignIn"></div>
+				</div>
+			</section><!-- content -->
+		</div><!-- container -->
+	
+	
+	
+	<h:form prependId="false" id="formForReg" method="post" role="form" >
+		<p:remoteCommand name="runFunction" action="#{controlUsersBean.RegisterNewUser()}"/>
+		<h:inputText style="display:none;" id="nameBean" value="#{controlUsersBean.theUserOfThisRegisteration.name}" />
+		<h:inputText style="display:none;" id="emailBean" value="#{controlUsersBean.theUserOfThisRegisteration.email}" />
+		<h:inputText style="display:none;" id="imageBean" value="#{controlUsersBean.theUserOfThisRegisteration.imageGoogle}" />
+		<h:inputText style="display:none;" id="tokenBean" value="#{controlUsersBean.theUserOfThisRegisteration.tokenId}" />
+		<h:inputText style="display:none;" id="typeBean" value="#{controlUsersBean.theUserOfThisRegisteration.accountType}" />
+		<h:inputText style="display:none;" id="passwordBean" value="#{controlUsersBean.passwordOfRegisteration}" />
+		<h:inputText style="display:none;" id="comfirmPasswordBean" value="#{controlUsersBean.passwordConfirm}" />
+	</h:form>
+	
+	
+		
+	<script>
+	
+	function onSignIn(googleUser){
+
+		
+		
+		var profile = googleUser.getBasicProfile();
+		var imageProfile=profile.getImageUrl();
+		var name=profile.getName();
+		var email=profile.getEmail();
+		var id_token = googleUser.getAuthResponse().id_token;
+
+		document.getElementById("nameBean").value = name;
+		document.getElementById("emailBean").value = email;
+		document.getElementById("imageBean").value = imageProfile;
+		document.getElementById("tokenBean").value = id_token;
+		document.getElementById("typeBean").value = 1;
+		document.getElementById("passwordBean").value = id_token;
+		document.getElementById("comfirmPasswordBean").value = id_token;
+		
+		runFunction();
+		
+		
+		googleUser.disconnect();
+		
+		
+	}
+	
+	function signOut() {
+	    var auth2 = gapi.auth2.getAuthInstance();
+	    auth2.signOut().then(function () {
+		 
+	    });
+		
+	}
+	
+	</script>
+			
+	</ui:define>
+	
+	
+	
+		
+	
+</ui:composition>
+</html>

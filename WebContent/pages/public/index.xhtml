@@ -1,0 +1,162 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:tp="http://java.sun.com/jsf/composite/elements/tree">
+<ui:composition template="/templates/main_template.xhtml">
+
+	<ui:define name="title">Family Tree</ui:define>
+
+
+	<ui:define name="content">
+	#{nodeBean.refresh()}
+	<style>
+		td, th {
+	    	padding: 17px;
+		}
+		
+		.inputStyle{
+			direction: rtl;
+		    font-size: 33px;
+		    margin-left: 55px;
+		    height: 55px;
+		    width: 300px;
+		    border-radius: 9px;
+		    padding-right: 26px;
+		}
+	
+		.labelClassStyle{
+		 	    width: 102px;
+			    font-size: 36px;
+			    color: whitesmoke;
+		}
+		
+		.mainPanelClass{
+			background: #c3b9b961;
+		    width: fit-content;
+		    margin-left: -16%;
+		    height: 229px;
+		    border-radius: 12px;
+		    box-shadow: 2px 7px 13px 5px rgba(0,0,0,0.45);
+		}
+		
+		
+		.treePanel{
+			background: #e2e2e2f7;
+		    width: 55%;
+		    height: 229px;
+		    border-radius: 12px;
+		    box-shadow: 2px 7px 13px 5px rgba(0,0,0,0.45);
+		    margin-top: 7%;
+		}
+		
+		.ui-priority-primary{
+			    background: #c3b9b9b5;
+			    font-size: x-large;
+			    width: 217px;
+			    height: 50px;
+			    margin-top: 39px;
+			    margin-left: -4%;
+		}
+		
+		 .ui-datalist .ui-datalist-content {
+        border:0 none
+    }
+     
+    .ui-datalist ul {
+        padding: 0px 10px 0 20px;
+        margin: 5px 0;
+    }
+     
+    .value {
+        font-weight: bold;
+    }
+     
+    .ui-autocomplete-itemtip {
+        -moz-box-sizing: content-box;
+        -webkit-box-sizing: content-box;
+        box-sizing: content-box;
+    }
+    
+    .rowOfTree{
+    	width: fit-content;
+    }
+	</style>
+    <!-- Header -->
+		
+    <!-- BEGIN MAIN -->
+    <main role="main" style="background: #ad3a62;height: -webkit-fill-available;">
+    <canvas class="pg-canvas" width="1903" height="929" style="display: block;height: -webkit-fill-available;"></canvas>
+        <div class="converter container">
+            <h3 class="text-center mainHeader">شجرة العائلة</h3>
+            <div class="exchangeForm row mainPanelClass" >
+                 <h:form id="formOfSearch"  style="      width: 100%;    margin-top: 16px;    direction: rtl;">
+                 <p:growl id="msgs" showDetail="true" />
+	                 <h:panelGrid columns="6" cellpadding="10" >
+	                 
+				        
+				        <p:outputLabel styleClass="labelClassStyle" value="أسمك" for="nameAuto" />
+				        <p:autoComplete inputStyleClass="inputStyle" id="nameAuto" value="#{nodeBean.name}" completeMethod="#{nodeBean.completeText}" />
+				        
+				        <p:outputLabel styleClass="labelClassStyle" value="أسم الأب" for="fatherAuto" />
+				        <p:autoComplete inputStyleClass="inputStyle" id="fatherAuto" value="#{nodeBean.fatherName}"  completeMethod="#{nodeBean.completeText}" />
+				        
+				        <p:outputLabel styleClass="labelClassStyle" value="أسم الجد" for="grandAuto" />
+				        <p:autoComplete inputStyleClass="inputStyle" id="grandAuto" value="#{nodeBean.grandName}"  completeMethod="#{nodeBean.completeText}" />
+				       
+				        
+				        
+				     </h:panelGrid>
+				     
+				     
+				      <p:commandButton value="البحث" id="ajax" action="#{nodeBean.selectNode}" update=":treeForm" styleClass="ui-priority-primary" />
+				 </h:form>
+				 
+				 
+				 <h:form id="treeForm" class="treePanel" style=" #{(nodeBean.selectedNode==null)?'display:none':''}">
+				
+    	<h:panelGroup  >
+    		<div class="container">
+		<div class="row rowOfTree" >
+				<!--
+			We will create a family tree using just CSS(3)
+			The markup will be simple nested lists
+			-->
+			<div class="tree">
+				<ul>
+				<tp:node nodeName="#{nodeBean.selectedNode.grandPaId.firstName}" >
+				
+						
+						<tp:node nodeName="#{nodeBean.selectedNode.fatherId.firstName}" >
+						
+								<ui:repeat var="son" value="#{nodeBean.listOfBrothersAndSisters}">
+								
+									<tp:node nodeName="#{son.firstName}" />
+								</ui:repeat>
+							
+						</tp:node>
+					</tp:node>
+				</ul>
+			</div>
+		</div>
+	</div>
+		</h:panelGroup>
+    </h:form>
+            </div>
+        </div>
+       
+    </main>
+    <!-- END MAIN -->
+    
+
+  
+	
+	</ui:define>
+	
+	
+</ui:composition>
+</html>

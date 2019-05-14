@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html	xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:p="http://primefaces.org/ui">
+  
+  <!-- the login handle box -->
+    <link rel="stylesheet" href="#{resource['css:header/style.bundle.css']}" />
+    
+    
+    
+    
+    <!-- Navigation -->
+		<nav class="navbar navbar-default navbar-fixed-top">
+			<div class="container">
+				<!-- Brand and toggle get grouped for better mobile display -->
+				<div class="navbar-header page-scroll">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand page-scroll" href="#page-top"><img src="#{resource['images:logo.png']}" style="width: 54px; height: -webkit-fill-available;" alt="Sanza theme logo"/></a>
+				</div>
+				<!-- Collect the nav links, forms, and other content for toggling -->
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav navbar-right">
+						<li class="hidden">
+							<a href="#page-top"></a>
+						</li>
+						
+						
+						<li>
+							<a class="page-scroll" href="#contact">للاتصال</a>
+						</li>
+						
+						<li>
+							<a class="page-scroll" href="#page-top">الرئيسية</a>
+						</li>
+						
+						<li style="margin-top: -7px;" class="d-none d-lg-block d-xl-block m-nav__item m-topbar__user-profile m-dropdown m-dropdown--medium m-dropdown--arrow m-dropdown--align-right m-dropdown--mobile-full-width m-dropdown--skin-light" m-dropdown-toggle="click" aria-expanded="true" >
+					        <h:form style="margin-left: 100px;">   
+						<a href="#" class="m-nav__link m-dropdown__toggle">
+							<span class="m-topbar__userpic">
+								<h:graphicImage value="#{loginBean.theUserOfThisAccount.getphoto()}" style="border-style: solid;border-color: #a5a1a1;border-width: 1px;border-radius: 50%;border-width: 1px;width:60px;height:60px;border-color: #c3abab;" class="m--img-rounded m--marginless m--img-centered" alt=""/>
+							</span>
+											
+						</a>
+						
+						
+						
+						<div class="m-dropdown__wrapper" style="z-index: 101;">
+							<span class="m-dropdown__arrow m-dropdown__arrow--right " style="left: auto; right: 27%;"></span>
+							<div style="background: #f3f3f3f7; display: #{loginBean.getTheStatueOfLoginMenu()};    " class="m-dropdown__inner">
+								<div class="m-dropdown__header m--align-center">
+									<div class="m-card-user m-card-user--skin-light">
+										
+										<div class="m-card-user__details">
+											<span class="m-card-user__name m--font-weight-500">#{loginBean.theUserOfThisAccount.name}</span>
+											<br></br>
+											<br></br>
+											<a href="" class="m-card-user__email m--font-weight-300 m-link">#{loginBean.theUserOfThisAccount.email}</a>
+										</div>
+									</div>
+								</div>
+								<div class="m-dropdown__body">
+									<div class="m-dropdown__content">
+										<ul class="m-nav m-nav--skin-light">
+										<!--  	
+											<li class="m-nav__item">
+												<a href="?page=profile&amp;demo=demo11" class="m-nav__link">
+													<i class="m-nav__link-icon flaticon-profile-1"></i>
+													<span class="m-nav__link-title">  
+														<span class="m-nav__link-wrap">      
+															<span class="m-nav__link-text">My Profile</span>       
+														</span>
+													</span>
+												</a>
+											</li>
+											
+											-->
+											
+											<li class="m-nav__item">
+												<h:commandLink action="#{loginBean.logOut}" style="width:91%" class="btn m-btn--pill    btn-secondary m-btn m-btn--custom m-btn--label-brand m-btn--bolder">Logout</h:commandLink>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+							
+							
+							
+							
+							
+							
+							<div style="background: #f3f3f3f7;display: #{loginBean.getTheStatueMenuMain()};" class="m-dropdown__inner">
+								
+								<div class="m-dropdown__body">
+									<div class="m-dropdown__content">
+										<ul class="m-nav m-nav--skin-light">
+											
+											
+				
+											<li class="m-nav__item">
+													<p:commandLink style="width:200px" class="m-nav__link">    
+													<i class="m-nav__link-icon flaticon-lifebuoy"></i>
+													</p:commandLink>
+											</li>
+											<li class="m-nav__item">
+													<a href="/pages/public/login.xhtml" style="width:91%" class="btn m-btn--pill    btn-secondary m-btn m-btn--custom m-btn--label-brand m-btn--bolder">Login</a>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+							
+							
+							
+							
+							
+						</div>
+						</h:form>
+				</li>
+					</ul>
+				</div>
+				<!-- /.navbar-collapse -->
+			</div>
+			<!-- /.container-fluid -->
+		</nav>
+		
+    
+    
+    <!-- END nav -->
+    
+
+
+ <!--begin::login form shown-->
+<h:outputScript name="js/header/scripts.bundle.js"/>
+ 
+
+ 
+</html>

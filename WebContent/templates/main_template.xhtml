@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" >
+	
+	
+	
+	
+<h:head>
+  
+		<title>
+			<ui:insert name="title"> 
+			    on Shop  
+			</ui:insert>
+		</title>
+	
+		<link rel="icon" type="image/png" href="#{resource['images:logo.png']}"/>
+		<meta charset="utf-8"/>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1"/>
+		<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+		<meta name="description" content=""/>
+		<meta name="author" content=""/>
+		<link rel="icon" href="favicon.ico"/>
+		
+    
+    <link href="https://fonts.googleapis.com/css?family=Work+Sans:100,200,300,400,700,800" rel="stylesheet"/>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"/>
+    
+    <link rel="stylesheet" href="#{resource['css:owl.carousel.css']}" />
+    <link rel="stylesheet" href="#{resource['css:bootstrap.min.css']}" />
+    <link rel="stylesheet" href="#{resource['css:style.css']}" />
+    <link rel="stylesheet" href="#{resource['css:tree.css']}" />
+    
+    
+     <!-- BEGIN FONT FILES -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css"/>
+    <!-- END FONT FILES -->
+    
+    <!-- CSS LINK FOR THIS PAGE -->
+    <link rel="stylesheet" href="#{resource['css:index.css']}" />
+    
+</h:head>
+
+
+
+
+
+
+<h:body> 
+<div align="center" id="header">
+    <ui:insert name="header">
+    	<ui:include src="header.xhtml"/> 
+    </ui:insert>
+</div>
+
+
+<div align="center" id="content">
+  
+  <ui:insert name="content"> 
+    	 <ui:include src="content.xhtml"/> 
+  </ui:insert>
+ </div>
+
+<div align="center" id="footer">
+  <ui:insert name="footer">
+    	<ui:include src="footer.xhtml"/>
+    	
+  </ui:insert>
+</div>
+
+		<h:outputScript name="js/bootstrap.min.js"/>
+		<h:outputScript name="js/owl.carousel.min.js"/>
+		<h:outputScript name="js/cbpAnimatedHeader.js"/>
+		<h:outputScript name="js/jquery.appear.js"/>
+		<h:outputScript name="js/SmoothScroll.min.js"/>
+		<h:outputScript name="js/theme-scripts.js"/>
+		<h:outputScript name="js/swal.js"/>
+
+
+<!-- SCRIPT LINK FOR JQUERY -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <!-- SCRIPT LINK FOR BOOTSTRAP POPPER -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <!-- SCRIPT LINK FOR BOOTSTRAP JS -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+    <!-- SCRIPT LINK FOR PARTICLEGROUND JS -->    
+	<h:outputScript name="js/jquery.particleground.min.js"/>
+
+<script>
+        //INTIALZE THE BACKGROUND
+        $('main').particleground({
+            //DOT COLORS IN THE BACKGROUND
+            dotColor: '#ffffff54',
+            //LINE COLORS IN THE BACKGROUND
+            lineColor: '#ffffff54'
+        });
+        
+
+        $.noConflict();
+       
+    </script>
+</h:body>
+
+</html>

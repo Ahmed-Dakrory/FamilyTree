@@ -1,0 +1,352 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/templates/dashboard.xhtml">
+
+	<ui:define name="title">Shop Login</ui:define>
+
+	<ui:define name="JavaScript">
+		
+		<h:outputScript name="js/dashboard/assets/vendor/jquery-appear/jquery.appear.js"/>
+		<h:outputScript name="js/dashboard/assets/vendor/jquery-easypiechart/jquery.easypiechart.js"/>
+		<h:outputScript name="js/dashboard/assets/vendor/flot/jquery.flot.js"/>
+		<h:outputScript name="js/dashboard/assets/vendor/flot-tooltip/jquery.flot.tooltip.js"/>
+		<h:outputScript name="js/dashboard/assets/vendor/flot/jquery.flot.pie.js"/>
+		<h:outputScript name="js/dashboard/assets/vendor/flot/jquery.flot.categories.js"/>
+		<h:outputScript name="js/dashboard/assets/vendor/flot/jquery.flot.resize.js"/>
+		<h:outputScript name="js/dashboard/assets/vendor/jquery-sparkline/jquery.sparkline.js"/>
+		<h:outputScript name="js/dashboard/assets/vendor/raphael/raphael.js"/>
+		<h:outputScript name="js/dashboard/assets/vendor/morris/morris.js"/>
+		<h:outputScript name="js/dashboard/assets/vendor/gauge/gauge.js"/>
+		<h:outputScript name="js/dashboard/assets/vendor/snap-svg/snap.svg.js"/>
+		<h:outputScript name="js/dashboard/assets/vendor/liquid-meter/liquid.meter.js"/>
+	
+		</ui:define>
+		
+		
+	
+	<ui:define name="CssDesign">
+	
+		
+	</ui:define>
+	<ui:define name="content">
+	 #{generalBean.refresh()}
+	 <section role="main" class="content-body">
+					<header class="page-header">
+						<h2>Dashboard</h2>
+					
+						<div class="right-wrapper pull-right">
+							<ol class="breadcrumbs">
+								<li>
+									<a href="/pages/secured/admin/home.jsf">
+										<i class="fa fa-home"></i>
+									</a>
+								</li>
+								
+							</ol>
+					
+							<a class="sidebar-right-toggle"></a>
+						</div>
+					</header>
+
+					<!-- start: page -->
+						<h2 class="mt-none">#{loginBean.theUserOfThisAccount.name} Account</h2>
+						
+						<div class="row">
+						
+							<div class="col-md-6">
+								<section class="panel">
+									<header class="panel-heading">
+										<div class="panel-actions">
+											<a href="#" class="fa fa-caret-down"></a>
+											<a href="#" class="fa fa-times"></a>
+										</div>
+						
+										<h2 class="panel-title">Share percentage for All Users</h2>
+										<p class="panel-subtitle">Pie Chart simplify the shares</p>
+									</header>
+									<div class="panel-body">
+						
+										<!-- Flot: Pie -->
+										<div class="chart chart-md" id="flotPie"></div>
+										<script type="text/javascript">
+											var flotPieData = [{
+												label: "Series 2",
+												data: [
+													[1, 0]
+												]
+											}];
+											<ui:repeat value="#{generalBean.allmoneybox}" var="box">
+												flotPieData.push({
+														label: "#{box.user_id.name}",
+														data: [
+															[1, #{box.totalMoney}]
+														]
+													});
+											</ui:repeat>
+											
+						
+											// See: assets/javascripts/ui-elements/examples.charts.js for more settings.
+						
+										</script>
+						
+									</div>
+								</section>
+							</div>
+							<div class="col-md-6">
+								<section class="panel">
+									<header class="panel-heading">
+										<div class="panel-actions">
+											<a href="#" class="fa fa-caret-down"></a>
+											<a href="#" class="fa fa-times"></a>
+										</div>
+						
+										<h2 class="panel-title">Shares in LE </h2>
+										<p class="panel-subtitle">Shares for each one in the company</p>
+									</header>
+									<div class="panel-body">
+						
+										<!-- Morris: Donut -->
+										<div class="chart chart-md" id="morrisDonut"></div>
+										<script type="text/javascript">
+						
+											var morrisDonutData = [];
+											<ui:repeat value="#{generalBean.allmoneybox}" var="box">
+											morrisDonutData.push({
+													label: "#{box.user_id.name}",
+													value:  #{box.totalMoney} 
+												});
+										</ui:repeat>
+										
+						
+											// See: assets/javascripts/ui-elements/examples.charts.js for more settings.
+						
+										</script>
+						
+									</div>
+								</section>
+							</div>
+						
+						</div>
+						
+						
+						<div class="row">
+								<h2>More Details</h2>
+						
+								<div class="row">
+									
+									<div class="col-md-6">
+										<section class="panel">
+											<header class="panel-heading">
+												<div class="panel-actions">
+													<a href="#" class="fa fa-caret-down"></a>
+													<a href="#" class="fa fa-times"></a>
+												</div>
+						
+												<h2 class="panel-title">Your MoneyBox</h2>
+												<p class="panel-subtitle">More details about your moneybox</p>
+											</header>
+											<div class="panel-body">
+												<div class="row text-center">
+												<div class="col-md-6">
+										<!-- Morris: Donut -->
+										<div class="chart chart-md " style="height:157px;" id="morrisDonut3"></div>
+										<script type="text/javascript">
+						
+											var morrisDonutData3 = [{
+												label: "Payments ",
+												value:  #{generalBean.myMoneyBox.totalMoney - generalBean.myMoneyBox.moneyRemains} 
+											},{
+												label: "Remaining",
+												value:  #{generalBean.myMoneyBox.moneyRemains}  
+											},{
+												label: "Payable",
+												value:  #{generalBean.myMoneyBox.payable}  
+											}];
+											
+										
+										
+						
+											// See: assets/javascripts/ui-elements/examples.charts.js for more settings.
+						
+										</script>
+						</div>
+						<div class="col-md-6" style="    font-size: xx-large;    height: 139px;    padding-top: 9%;    font-family: fantasy;">
+							Total : #{generalBean.myMoneyBox.totalMoney} LE
+						</div>
+												</div>
+												<div class="row text-center" >
+													<div class="col-md-6">
+														<div class="circular-bar" >
+															<div class="circular-bar-chart"  data-percent="#{generalBean.percentageRemainingMoney}" data-plugin-options='{ "barColor": "#0088CC", "delay": 100 }'>
+																<strong>Payments</strong>
+																<label><span class="percent">#{generalBean.percentageRemainingMoney}</span>%</label>
+															</div>
+														</div>
+													</div>
+													<div class="col-md-6">
+														<div class="circular-bar">
+															<div class="circular-bar-chart" data-percent="#{generalBean.myMoneyBox.moneyRemains/generalBean.myMoneyBox.totalMoney*100}" data-plugin-options='{ "barColor": "#2BAAB1", "delay": 200 }'>
+																<strong>Remains</strong>
+																<label><span class="percent">#{generalBean.myMoneyBox.moneyRemains/generalBean.myMoneyBox.totalMoney*100}</span>%</label>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</section>
+									</div>
+									<div class="col-md-6">
+								<section class="panel">
+									<header class="panel-heading">
+										<div class="panel-actions">
+											<a href="#" class="fa fa-caret-down"></a>
+											<a href="#" class="fa fa-times"></a>
+										</div>
+						
+										<h2 class="panel-title">Resources over the company</h2>
+										<p class="panel-subtitle">Number of Products, raw material,Assets and All Expanses,</p>
+									</header>
+									<div class="panel-body">
+						
+										<!-- Morris: Donut -->
+										<div class="chart chart-md" id="morrisDonut2"></div>
+										<script type="text/javascript">
+						
+											var morrisDonutData2 = [{
+												label: "Number Of Products",
+												value: #{productsBean.listOfProducts.size()}
+											},{
+												label: "Number of Assets",
+												value: #{assetsBean.listOfAssets.size()}
+											},{
+												label: "Number of Expenses",
+												value: #{expensesBean.listOfExpenses.size()}
+											},{
+												label: "Number of Raw Material",
+												value: #{rawMaterialBean.listOfrawMaterials.size()}
+											}];
+											
+										
+						
+											// See: assets/javascripts/ui-elements/examples.charts.js for more settings.
+						
+										</script>
+						
+									</div>
+								</section>
+							</div>
+								</div>
+								
+							
+							
+						</div>
+
+					<div class="row">
+								<div class="col-md-12 col-lg-6 col-xl-6">
+									<section class="panel panel-featured-left panel-featured-primary">
+										<div class="panel-body">
+											<div class="widget-summary">
+												<div class="widget-summary-col widget-summary-col-icon">
+													<div class="summary-icon bg-primary">
+														<i class="fa fa-shopping-cart"></i>
+													</div>
+												</div>
+												<div class="widget-summary-col">
+													<div class="summary">
+														<h4 class="title">Total Expenses this Month</h4>
+														<div class="info">
+															<strong class="amount">#{generalBean.totalExpensesThisMonth} LE</strong>
+														</div>
+													</div>
+													
+												</div>
+											</div>
+										</div>
+									</section>
+								</div>
+								<div class="col-md-12 col-lg-6 col-xl-6">
+									<section class="panel panel-featured-left panel-featured-secondary">
+										<div class="panel-body">
+											<div class="widget-summary">
+												<div class="widget-summary-col widget-summary-col-icon">
+													<div class="summary-icon bg-secondary">
+														<i class="fa fa-user"></i>
+													</div>
+												</div>
+												<div class="widget-summary-col">
+													<div class="summary">
+														<h4 class="title">Total Receivables this Month</h4>
+														<div class="info">
+															<strong class="amount">#{generalBean.totalPaymentsThisMonth} LE</strong>
+														</div>
+													</div>
+													
+												</div>
+											</div>
+										</div>
+									</section>
+								</div>
+								<div class="col-md-12 col-lg-6 col-xl-6">
+									<section class="panel panel-featured-left panel-featured-tertiary">
+										<div class="panel-body">
+											<div class="widget-summary">
+												<div class="widget-summary-col widget-summary-col-icon">
+													<div class="summary-icon bg-tertiary">
+														<i class="fa fa-usd"></i>
+													</div>
+												</div>
+												<div class="widget-summary-col">
+													<div class="summary">
+														<h4 class="title">Total profit this Month</h4>
+														<div class="info">
+															<strong class="amount">#{generalBean.totalProfitThisMonth} LE</strong>
+														</div>
+													</div>
+													
+												</div>
+											</div>
+										</div>
+									</section>
+								</div>
+								
+								<div class="col-md-12 col-lg-6 col-xl-6">
+									<section class="panel panel-featured-left panel-featured-tertiary">
+										<div class="panel-body">
+											<div class="widget-summary">
+												<div class="widget-summary-col widget-summary-col-icon">
+													<div class="summary-icon bg-tertiary">
+														<i class="fa fa-usd"></i>
+													</div>
+												</div>
+												<div class="widget-summary-col">
+													<div class="summary">
+														<h4 class="title">My Profit over this Month</h4>
+														<div class="info">
+															<strong class="amount">#{generalBean.percentageMyProfitThisMonth} LE</strong>
+														</div>
+													</div>
+													
+												</div>
+											</div>
+										</div>
+									</section>
+								</div>
+								
+							</div>
+					<!-- end: page -->
+				</section>
+				
+				
+	</ui:define>
+	
+		
+	
+</ui:composition>
+</html>

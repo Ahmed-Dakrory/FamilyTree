@@ -1,0 +1,53 @@
+/* Start General Styles */
+
+* {
+    font-family: "Montserrat";
+}
+
+.custom-select {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='%23fff' d='M2 0L0 2h4zm0 5L0 3h4z'/%3E%3C/svg%3E");
+}
+
+/* End General Styles */
+
+/* Start Main Style */
+
+main .pg-canvas {
+    position: absolute;
+}
+
+main .converter {
+    padding-top: 13rem;
+    padding-bottom: 13rem;
+}
+
+main .converter .mainHeader {
+    color: white;
+    margin-bottom: 30px;  
+	font-size: -webkit-xxx-large;
+}
+
+main .converter .exchangeForm i {
+    color: white;
+}
+
+main .converter .exchangeForm input,
+main .converter .exchangeForm select {
+    color: white;
+    border: 2px solid white;
+    background-color: transparent;
+}
+
+main .converter .exchangeForm select option {
+    color: black;
+}
+
+/* End Main Styles */
+
+/* Start Footer Style */
+
+footer {
+    padding: 30px;
+}
+
+/* End Footer Styles */
