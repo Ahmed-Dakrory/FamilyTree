@@ -84,10 +84,10 @@ public class nodeAppServiceImpl implements InodeAppService{
 
 
 	@Override
-	public node getByNameAndFatherAndGrand(String name,String father, String grand) {
+	public node getByNameAndFatherAndGrandAndFamily(String name,String father, String grand,String familyName) {
 		// TODO Auto-generated method stub
 				try{
-					node so=nodeDataRepository.getByNameAndFatherAndGrand(name, father, grand);
+					node so=nodeDataRepository.getByNameAndFatherAndGrandAndFamily(name, father, grand, familyName);
 					
 					return so;
 					}

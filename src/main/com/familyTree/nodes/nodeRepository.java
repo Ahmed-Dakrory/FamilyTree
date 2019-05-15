@@ -17,6 +17,6 @@ public interface nodeRepository {
 	public List<node> getSonsOfGrand(int id);
 	public node addnode(node data);
 	public node getById(int id);
-	public node getByNameAndFatherAndGrand(String name,String father, String grand);
+	public node getByNameAndFatherAndGrandAndFamily(String name,String father, String grand,String familyName);
 	public boolean delete(node data) throws Exception;
 }

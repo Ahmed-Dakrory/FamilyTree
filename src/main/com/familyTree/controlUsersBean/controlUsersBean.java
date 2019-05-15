@@ -1,6 +1,5 @@
 package main.com.familyTree.controlUsersBean;
 
-import java.io.Serializable;
 import java.util.Calendar;
 
 import javax.annotation.PostConstruct;
@@ -21,15 +20,8 @@ import main.com.familyTree.loginNeeds.userAppServiceImpl;
 
 @ManagedBean(name = "controlUsersBean")
 @SessionScoped
-public class controlUsersBean implements Serializable{
+public class controlUsersBean{
 	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 3409138026523580159L;
-	/**
-	 * 
-	 */
 	
 
 	@ManagedProperty(value = "#{userFacadeImpl}")
@@ -194,10 +186,6 @@ public void RegisterNewUser(){
 		this.loginBean = loginBean;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
 
-	
 	
 }

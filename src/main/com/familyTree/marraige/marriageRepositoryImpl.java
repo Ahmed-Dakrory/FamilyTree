@@ -1,7 +1,7 @@
 /**
  * 
  */
-package main.com.familyTree.nodes;
+package main.com.familyTree.marraige;
 
 import java.util.Calendar;
 import java.util.List;
@@ -20,7 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Repository
 @Transactional
-public class nodeRepositoryImpl implements nodeRepository{
+public class marriageRepositoryImpl implements marriageRepository{
 
 	@Autowired
 	private SessionFactory sessionFactory;
@@ -30,7 +30,7 @@ public class nodeRepositoryImpl implements nodeRepository{
 	
 
 	@Override
-	public node addnode(node data) {
+	public marriage addmarriage(marriage data) {
 		try{
 			data.setLastUpdate(Calendar.getInstance());
 			session = sessionFactory.openSession();
@@ -49,11 +49,11 @@ public class nodeRepositoryImpl implements nodeRepository{
 	}
 
 	@Override
-	public List<node> getAll() {
-				 Query query 	=sessionFactory.getCurrentSession().getNamedQuery("node.getAll");
+	public List<marriage> getAll() {
+				 Query query 	=sessionFactory.getCurrentSession().getNamedQuery("marriage.getAll");
 
 				 @SuppressWarnings("unchecked")
-				List<node> results=query.list();
+				List<marriage> results=query.list();
 				 if(results.size()!=0){
 					 return results;
 				 }else{
@@ -63,7 +63,7 @@ public class nodeRepositoryImpl implements nodeRepository{
 
 	
 	@Override
-	public boolean delete(node data) throws Exception {
+	public boolean delete(marriage data) throws Exception {
 		// TODO Auto-generated method stub
 		try {
 			session = sessionFactory.openSession();
@@ -78,12 +78,12 @@ public class nodeRepositoryImpl implements nodeRepository{
 	}
 
 	@Override
-	public node getById(int id) {
+	public marriage getById(int id) {
 		// TODO Auto-generated method stub
-		 Query query 	=sessionFactory.getCurrentSession().getNamedQuery("node.getById").setInteger("id",id);
+		 Query query 	=sessionFactory.getCurrentSession().getNamedQuery("marriage.getById").setInteger("id",id);
 
 		 @SuppressWarnings("unchecked")
-		List<node> results=query.list();
+		List<marriage> results=query.list();
 		 if(results.size()!=0){
 			 return results.get(0);
 		 }else{
@@ -91,40 +91,13 @@ public class nodeRepositoryImpl implements nodeRepository{
 		 }
 	}
 
-	@Override
-	public node getByNameAndFatherAndGrandAndFamily(String name,String father, String grand,String familyName){
-		// TODO Auto-generated method stub
-				 Query query 	=sessionFactory.getCurrentSession().getNamedQuery("node.getByNameAndFatherAndGrand").setString("firstName", name)
-						 .setString("fatherIdName", father).setString("grandPaIdName", grand).setString("familyName", familyName);
-
-				 @SuppressWarnings("unchecked")
-				List<node> results=query.list();
-				 if(results.size()!=0){
-					 return results.get(0);
-				 }else{
-					 return null;
-				 }
-	}
 
 	@Override
-	public List<node> getSonsOfParent(int id) {
-		 Query query 	=sessionFactory.getCurrentSession().getNamedQuery("node.getSonsOfParent").setInteger("fatherId", id);
+	public List<marriage> getWomanMarriedManWithId(int id) {
+		 Query query 	=sessionFactory.getCurrentSession().getNamedQuery("marriage.getWomanMarriedManWithId").setInteger("manId", id);
 
 		 @SuppressWarnings("unchecked")
-		List<node> results=query.list();
-		 if(results.size()!=0){
-			 return results;
-		 }else{
-			 return null;
-		 }
-	}
-
-	@Override
-	public List<node> getSonsOfGrand(int id) {
-		 Query query 	=sessionFactory.getCurrentSession().getNamedQuery("node.getSonsOfGrand").setInteger("grandPaId", id);
-
-		 @SuppressWarnings("unchecked")
-		List<node> results=query.list();
+		List<marriage> results=query.list();
 		 if(results.size()!=0){
 			 return results;
 		 }else{

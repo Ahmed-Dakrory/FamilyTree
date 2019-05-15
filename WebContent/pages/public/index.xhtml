@@ -21,18 +21,19 @@
 		
 		.inputStyle{
 			direction: rtl;
-		    font-size: 33px;
-		    margin-left: 55px;
-		    height: 55px;
-		    width: 300px;
+		    font-size: 31px;
+		    margin-left: 13px;
+		    height: 39px;
+		    width: 196px;
 		    border-radius: 9px;
 		    padding-right: 26px;
 		}
 	
 		.labelClassStyle{
-		 	    width: 102px;
-			    font-size: 36px;
-			    color: whitesmoke;
+		 	       width: max-content;
+				    font-size: 36px;
+				    color: whitesmoke;
+
 		}
 		
 		.mainPanelClass{
@@ -46,12 +47,12 @@
 		
 		
 		.treePanel{
-			background: #e2e2e2f7;
-		    width: 55%;
-		    height: 229px;
-		    border-radius: 12px;
-		    box-shadow: 2px 7px 13px 5px rgba(0,0,0,0.45);
-		    margin-top: 7%;
+			    background: #e2e2e2f7;
+			    width: 91%;
+			    height: max-content;
+			    border-radius: 12px;
+			    box-shadow: 2px 7px 13px 5px rgba(0,0,0,0.45);
+			    margin-top: 7%;
 		}
 		
 		.ui-priority-primary{
@@ -90,13 +91,13 @@
 		
     <!-- BEGIN MAIN -->
     <main role="main" style="background: #ad3a62;height: -webkit-fill-available;">
-    <canvas class="pg-canvas" width="1903" height="929" style="display: block;height: -webkit-fill-available;"></canvas>
+    <canvas class="pg-canvas" width="1903" height="3000" style="display: block;height: -webkit-fill-available;"></canvas>
         <div class="converter container">
             <h3 class="text-center mainHeader">شجرة العائلة</h3>
             <div class="exchangeForm row mainPanelClass" >
                  <h:form id="formOfSearch"  style="      width: 100%;    margin-top: 16px;    direction: rtl;">
                  <p:growl id="msgs" showDetail="true" />
-	                 <h:panelGrid columns="6" cellpadding="10" >
+	                 <h:panelGrid columns="8" cellpadding="10" >
 	                 
 				        
 				        <p:outputLabel styleClass="labelClassStyle" value="أسمك" for="nameAuto" />
@@ -107,6 +108,9 @@
 				        
 				        <p:outputLabel styleClass="labelClassStyle" value="أسم الجد" for="grandAuto" />
 				        <p:autoComplete inputStyleClass="inputStyle" id="grandAuto" value="#{nodeBean.grandName}"  completeMethod="#{nodeBean.completeText}" />
+				       
+				         <p:outputLabel styleClass="labelClassStyle" value="أسم العائلة" for="familyAuto" />
+				        <p:autoComplete inputStyleClass="inputStyle" id="familyAuto" value="#{nodeBean.familyName}"  completeMethod="#{nodeBean.completeText}" />
 				       
 				        
 				        
@@ -126,12 +130,15 @@
 			We will create a family tree using just CSS(3)
 			The markup will be simple nested lists
 			-->
+			
 			<div class="tree">
 				<ul>
-				<tp:node nodeName="#{nodeBean.selectedNode.grandPaId.firstName}" >
+				<tp:node nodeName="#{nodeBean.selectedNode.grandPaId.firstName}" varBeanWomen="#{nodeBean.grandMarriage}">
 				
-						
-						<tp:node nodeName="#{nodeBean.selectedNode.fatherId.firstName}" >
+						<ui:repeat var="uncles" value="#{nodeBean.listOfBrothersAndSistersOfGrand}">
+							<tp:node nodeName="#{uncles.firstName}" />
+						</ui:repeat>
+						<tp:node nodeName="#{nodeBean.selectedNode.fatherId.firstName}" varBeanWomen="#{nodeBean.fatherMarriage}">
 						
 								<ui:repeat var="son" value="#{nodeBean.listOfBrothersAndSisters}">
 								

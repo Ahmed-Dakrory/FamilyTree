@@ -1,7 +1,6 @@
 package main.com.familyTree.loginNeeds;
 
 import java.io.IOException;
-import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
@@ -20,12 +19,8 @@ import main.com.familyTree.security.AuthenticationService;
 
 @ManagedBean(name = "loginBean")
 @SessionScoped
-public class loginBean implements Serializable{
+public class loginBean  {
 	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -6715784400190397743L;
 	private boolean isLoggedIn;
 	private String emailOfUserLoggedIn;
 	private String passwordOfUserLoggedIn;
@@ -316,9 +311,7 @@ public class loginBean implements Serializable{
 		this.authenticationService = authenticationService;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
+	
 
 	public String getPasswordOfRegisteration() {
 		return passwordOfRegisteration;

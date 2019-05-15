@@ -13,13 +13,20 @@
 	<composite:attribute name="nodeBranches"/>
 	<composite:attribute name="nodeName"/>
 	<composite:attribute name="id_container"/>
+	<composite:attribute name="varBeanWomen"/>
 </composite:interface>
 
 <composite:implementation>
 		
 		
 		<li  id="#{cc.attrs.id_container}" style="#{(cc.attrs.nodeName)==null?'display:none;':'display:block;'}">
-			<a>#{cc.attrs.nodeName}</a>
+			<div> #{cc.attrs.nodeName}
+			<h:form>
+			<ui:repeat var="woman" value="#{cc.attrs.varBeanWomen}">
+				<p:commandButton class="#{(woman.state==0)?'womanMarried':'womanDeforced'}" value="#{woman.womanId.firstName}"></p:commandButton>
+			</ui:repeat>
+			</h:form>
+			</div>
 			
 			
 			<ul>

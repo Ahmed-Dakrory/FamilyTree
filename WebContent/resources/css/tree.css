@@ -14,7 +14,7 @@
 	list-style-type: none;
 	position: relative;
 	padding: 20px 5px 0 5px;
-	
+	    line-height: 53px;
 	transition: all 0.5s;
 	-webkit-transition: all 0.5s;
 	-moz-transition: all 0.5s;
@@ -31,6 +31,22 @@
 .tree li::after{
 	right: auto; left: 50%;
 	border-left: 1px solid #ccc;
+}
+
+.womanMarried{
+	    width: 75px;
+    height: 75px;
+    border-radius: 66px;
+    font-size: 15px;
+    background: #ccdad5;
+}
+
+.womanDeforced{
+	width: 57px;
+    height: 57px;
+    border-radius: 66px;
+    font-size: 11px;
+    background: #d2945d;
 }
 
 /*We need to remove left-right connectors from elements without 
@@ -68,7 +84,7 @@ right connector from last child*/
 	width: 0; height: 20px;
 }
 
-.tree li a{
+.tree li div{
 	border: 2px solid #ccc;
 	padding: 5px 10px;
 	text-decoration: none;
@@ -88,14 +104,14 @@ right connector from last child*/
 
 /*Time for some hover effects*/
 /*We will apply the hover effect the the lineage of the element also*/
-.tree li a:hover, .tree li a:hover+ul li a {
+.tree li div:hover, .tree li div:hover+ul li div {
 	background: #c8e4f8; color: #000; border: 1px solid #94a0b4;
 }
 /*Connector styles on hover*/
-.tree li a:hover+ul li::after, 
-.tree li a:hover+ul li::before, 
-.tree li a:hover+ul::before, 
-.tree li a:hover+ul ul::before{
+.tree li div:hover+ul li::after, 
+.tree li div:hover+ul li::before, 
+.tree li div:hover+ul::before, 
+.tree li div:hover+ul ul::before{
 	border-color:  #94a0b4;
 }
 

@@ -36,7 +36,7 @@ import org.hibernate.annotations.NamedQuery;
 			)
 	,
 	@NamedQuery(name="node.getByNameAndFatherAndGrand",
-	query = "from node d where d.firstName = :firstName and d.fatherId.firstName =:fatherIdName and d.grandPaId.firstName =:grandPaIdName"
+	query = "from node d where d.firstName = :firstName and d.fatherId.firstName =:fatherIdName and d.grandPaId.firstName =:grandPaIdName and d.familyName =:familyName"
 			)
 	
 	,
@@ -81,6 +81,8 @@ public class node {
 	@JoinColumn(name = "grandPaId")
 	private node grandPaId;
 
+	@Column(name = "familyName")
+	private String familyName;
 	
 	@Column(name = "comfirmNum")
 	private Integer comfirmNum;
@@ -174,6 +176,23 @@ public class node {
 
 	public void setGrandPaId(node grandPaId) {
 		this.grandPaId = grandPaId;
+	}
+
+
+
+	
+
+
+	public String getFamilyName() {
+		return familyName;
+	}
+
+
+
+
+
+	public void setFamilyName(String familyName) {
+		this.familyName = familyName;
 	}
 
 

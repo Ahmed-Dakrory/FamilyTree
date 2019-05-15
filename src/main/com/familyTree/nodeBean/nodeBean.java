@@ -1,6 +1,5 @@
 package main.com.familyTree.nodeBean;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,18 +8,19 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 
+import main.com.familyTree.marraige.marriage;
+import main.com.familyTree.marraige.marriageAppServiceImpl;
 import main.com.familyTree.nodes.node;
 import main.com.familyTree.nodes.nodeAppServiceImpl;
 
 
 @ManagedBean(name = "nodeBean")
 @SessionScoped
-public class nodeBean implements Serializable{
+public class nodeBean  {
 	
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 3409138026523580159L;
 	/**
 	 * 
 	 */
@@ -28,6 +28,9 @@ public class nodeBean implements Serializable{
 
 	@ManagedProperty(value = "#{nodeFacadeImpl}")
 	private nodeAppServiceImpl nodeDataFacede; 
+	
+	@ManagedProperty(value = "#{marriageFacadeImpl}")
+	private marriageAppServiceImpl marriageDataFacede; 
 	
 	
 	private List<node> listOfAllNodes;
@@ -37,10 +40,14 @@ public class nodeBean implements Serializable{
 	 private String name;
 	 private String fatherName;
 	 private String grandName;
+	 private String familyName;
 	
 	 private node selectedNode;
 	 private List<node>listOfBrothersAndSisters;
 	 private List<node>listOfBrothersAndSistersOfGrand;
+	 
+	 private List<marriage> grandMarriage;
+	 private List<marriage> fatherMarriage;
 	 
 	@PostConstruct
 	public void init() {
@@ -58,10 +65,19 @@ public class nodeBean implements Serializable{
 
 	public void selectNode() {
 		
-		selectedNode=nodeDataFacede.getByNameAndFatherAndGrand(name, fatherName, grandName);
+		selectedNode=nodeDataFacede.getByNameAndFatherAndGrandAndFamily(name, fatherName, grandName,familyName);
 		if(selectedNode!=null) {
-		listOfBrothersAndSisters=nodeDataFacede.getSonsOfParent(selectedNode.getFatherId().getId());
-		listOfBrothersAndSistersOfGrand=nodeDataFacede.getSonsOfParent(selectedNode.getGrandPaId().getId());
+			grandMarriage=marriageDataFacede.getWomanMarriedManWithId(selectedNode.getGrandPaId().getId());
+			fatherMarriage=marriageDataFacede.getWomanMarriedManWithId(selectedNode.getFatherId().getId());
+			listOfBrothersAndSisters=nodeDataFacede.getSonsOfParent(selectedNode.getFatherId().getId());
+			listOfBrothersAndSistersOfGrand=nodeDataFacede.getSonsOfParent(selectedNode.getGrandPaId().getId());
+		}
+		
+		for(int i=0;i<listOfBrothersAndSistersOfGrand.size();i++) {
+			if(listOfBrothersAndSistersOfGrand.get(i).getFirstName().equals(selectedNode.getFatherId().getFirstName())) {
+				listOfBrothersAndSistersOfGrand.remove(i);
+			}
+			
 		}
 		System.out.println("Dakrory: "+listOfBrothersAndSisters.size());
 	}
@@ -150,10 +166,40 @@ public class nodeBean implements Serializable{
 		this.listOfBrothersAndSistersOfGrand = listOfBrothersAndSistersOfGrand;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	
+	public String getFamilyName() {
+		return familyName;
 	}
 
+	public void setFamilyName(String familyName) {
+		this.familyName = familyName;
+	}
+
+	public marriageAppServiceImpl getMarriageDataFacede() {
+		return marriageDataFacede;
+	}
+
+	public void setMarriageDataFacede(marriageAppServiceImpl marriageDataFacede) {
+		this.marriageDataFacede = marriageDataFacede;
+	}
+
+	public List<marriage> getGrandMarriage() {
+		return grandMarriage;
+	}
+
+	public void setGrandMarriage(List<marriage> grandMarriage) {
+		this.grandMarriage = grandMarriage;
+	}
+
+	public List<marriage> getFatherMarriage() {
+		return fatherMarriage;
+	}
+
+	public void setFatherMarriage(List<marriage> fatherMarriage) {
+		this.fatherMarriage = fatherMarriage;
+	}
+
+	
 	
 	
 }
